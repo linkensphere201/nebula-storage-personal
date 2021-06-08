@@ -44,6 +44,7 @@ nebula_add_executable(
         $<TARGET_OBJECTS:common_encryption_obj>
         $<TARGET_OBJECTS:common_ft_es_storage_adapter_obj>
         $<TARGET_OBJECTS:common_version_obj>
+        $<TARGET_OBJECTS:common_utils_obj>
     LIBRARIES
         ${ROCKSDB_LIBRARIES}
         ${THRIFT_LIBRARIES}

@@ -5,6 +5,7 @@
  */
 
 #include "meta/processors/BaseProcessor.h"
+#include "common/utils/mylogger.h"
 
 namespace nebula {
 namespace meta {
@@ -225,6 +226,11 @@ template<typename RESP>
 ErrorOr<cpp2::ErrorCode, GraphSpaceID> BaseProcessor<RESP>::getSpaceId(const std::string& name) {
     auto indexKey = MetaServiceUtils::indexSpaceKey(name);
     auto ret = doGet(indexKey);
+
+    nebula::utils::myLogger::doLogEncBuf(
+            std::string("indexSpaceKey for space_name=") + name, -1, indexKey);
+    nebula::utils::myLogger::doLogBackTrace("", -1);
+
     if (nebula::ok(ret)) {
         return *reinterpret_cast<const GraphSpaceID*>(nebula::value(ret).c_str());
     }

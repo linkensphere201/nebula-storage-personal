@@ -224,10 +224,13 @@ void CreateSpaceProcessor::process(const cpp2::CreateSpaceReq& req) {
             return;
         }
 
+        VLOG(3) << "---Create Space " << spaceId << "---";
         for (auto partId = 1; partId <= partitionNum; partId++) {
             auto partHosts = pickHosts(partId, hosts, replicaFactor);
             data.emplace_back(MetaServiceUtils::partKey(spaceId, partId),
                               MetaServiceUtils::partVal(partHosts));
+            VLOG(3) << "->part " << partId <<
+                ", hosts= " << network::NetworkUtils::toHostsStr(partHosts);
         }
     }
 

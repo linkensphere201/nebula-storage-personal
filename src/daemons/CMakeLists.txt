@@ -32,6 +32,7 @@ set(common_deps
     $<TARGET_OBJECTS:common_time_utils_obj>
     $<TARGET_OBJECTS:common_ft_es_storage_adapter_obj>
     $<TARGET_OBJECTS:common_version_obj>
+    $<TARGET_OBJECTS:common_utils_obj>
 )
 
 nebula_add_executable(
@@ -50,6 +51,7 @@ nebula_add_executable(
         $<TARGET_OBJECTS:common_internal_storage_client_obj>
         $<TARGET_OBJECTS:common_graph_storage_client_obj>
         $<TARGET_OBJECTS:common_storage_client_base_obj>
+        $<TARGET_OBJECTS:common_utils_obj>
         $<TARGET_OBJECTS:storage_common_obj>
         ${common_deps}
     LIBRARIES

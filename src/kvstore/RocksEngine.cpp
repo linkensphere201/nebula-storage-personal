@@ -9,6 +9,8 @@
 #include <rocksdb/convenience.h>
 #include "common/base/Base.h"
 #include "common/fs/FileUtils.h"
+#include "common/utils/mylogger.h"
+
 #include "kvstore/KVStore.h"
 #include "kvstore/RocksEngineConfig.h"
 #include "utils/NebulaKeyUtils.h"
@@ -107,6 +109,10 @@ RocksEngine::RocksEngine(GraphSpaceID spaceId,
     if (cfFactory != nullptr) {
         options.compaction_filter_factory = cfFactory;
     }
+
+    std::stringstream ss;
+    ss << "SpaceId=" << spaceId << ",path=" << dataPath;
+    nebula::utils::myLogger::doLogBackTrace(ss.str(), -1);
 
     if (readonly) {
         status = rocksdb::DB::OpenForReadOnly(options, path, &db);
